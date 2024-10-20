@@ -11,9 +11,16 @@ export const getPosts = async () => {
 }
 
 export const getPostBySlug = async (id) => {
+    try {
+        const { data } = await api.get(`/posts?id=eq.${id}`);
 
-    //TODO: BUSCAR UM POST EM ESPECIFICO.
-    //const {data} = await api.get(`/post?id=eq.${id}`)
+        if (data && data.length > 0) {
+            return data[0];
+        }
 
-    return {}
+        return {};e
+    } catch (error) {
+        console.error('Erro ao obter o post:', error);
+        return {};
+    }
 }
